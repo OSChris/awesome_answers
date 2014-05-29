@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+
+  root 'questions#index'
+
+  resources :questions
+  #get 'questions' => 'questions#index',         as: 'questions_index'
+  #get 'questions/new' => 'questions#new',       as: 'new_question'
+  #post 'questions' => 'questions#create',       as: 'questions'
+  #get 'questions/:id' => 'questions#show',      as: 'question'
+  #get 'questions/:id/edit' => 'questions#edit', as: 'edit_question'
+  #match 'questions/:id' => 'questions#update', via: [:put, :patch]
+  #delete 'questions/:id' => 'questions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
