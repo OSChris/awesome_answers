@@ -18,7 +18,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 #user auth
 
-gem 'devise'
+gem 'devise', '~> 3.2.4'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
