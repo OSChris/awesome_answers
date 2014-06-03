@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :questions do 
+    resources :answers
+  end
+
+
+
   root 'questions#index'
 
-  resources :questions
   #get 'questions' => 'questions#index',         as: 'questions_index'
   #get 'questions/new' => 'questions#new',       as: 'new_question'
   #post 'questions' => 'questions#create',       as: 'questions'

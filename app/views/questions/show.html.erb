@@ -2,3 +2,25 @@
 <p><%= @question.description %></p>
 <%= link_to "Edit", edit_question_path(@question), class: "btn btn-primary", method: :get %> 
 <%= link_to "Delete", @question, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+<hr>
+<h2>Submit an answer </h2>
+
+<% if @answer.errors.any? %>
+  <ul>
+    <% @answer.errors.full_messages.each do |err| %>
+      <li><%= err %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<%= form_for [@question, @answer] do |f| %>
+  <%= f.text_area :body, class: "form-control"%>
+  <%= f.submit class: "btn btn-success" %>
+<% end %>
+
+<% @question.answers.each do |answer| %>
+  <%= answer.body %>
+  <%= button_to "Delete", [@question, answer], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger" %>
+  <hr>
+<% end %>
