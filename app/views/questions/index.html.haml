@@ -1,0 +1,16 @@
+.page-header
+  %h1 
+    Welcome to Awesome Answers
+    %small get all your answers here bro
+
+.row.getaway
+  .col-xs-12.col-md-4
+    = link_to "<i class='glyphicon-plus'> </i>Create New Question".html_safe, new_question_path, class: "btn btn-primary" 
+.row
+  .col-xs-12.col-md-12
+    - @questions.each_slice(3) do |question_group| 
+      .row
+        - question_group.each do |question|
+          .col-md-4.well.cre8
+            %h2= link_to question.title, question
+            %p= question.description
