@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 
+
+  devise_for :users
+  
   resources :questions do 
-    resources :answers
+    resources :answers, only: [:create, :destroy]
+  end
+  
+  resources :answers, only: [] do 
+    resources :comments, except: [:index, :show, :new]
   end
 
 

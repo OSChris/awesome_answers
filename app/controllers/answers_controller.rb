@@ -1,10 +1,12 @@
 class AnswersController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :b4_destroy, only: [:destroy]
 
   def create
-    @question = Question.find(params[:question_id])
-    @answer = @question.answers.new(answer_params)
+    @question    = Question.find(params[:question_id])
+    @answer      = @question.answers.new(answer_params)
+    @answer.user = current_user
     if @answer.save
       redirect_to @question, notice: "Answer created successfully"
     else

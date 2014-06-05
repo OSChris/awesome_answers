@@ -1,0 +1,5 @@
+%h1 Edit this guy
+
+= form_for [@answer, @comment] do |f|
+  = f.text_area :body
+  = f.submit "Update Comment"

@@ -2,6 +2,10 @@
 
 %p= @question.description
 
+- if @question.user
+  %p Created by #{@question.user.name_display}
+  %p At #{@question.created_at}
+
 = link_to "Edit", edit_question_path(@question), class: "btn btn-primary", method: :get  
 
 = link_to "Delete", @question, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" 
@@ -26,5 +30,18 @@
 - @question.answers.each do |answer| 
   = answer.body 
   = button_to "Delete", [@question, answer], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger" 
-
+  %hr
+  .row
+    .col-xs.12
+      = form_for [answer, @comment] do |f|
+        = f.text_area :body, rows: 2
+        = f.submit "Submit Comment", class: "btn btn-sm btn-info"
+    %hr
+  .row
+    - answer.comments.each do |comment|
+      .col-xs-11.col-xs-offset-1
+        = comment.body
+        = link_to "edit", edit_answer_comment_path(answer, comment), class: "btn btn-info btn-xs"
+        = button_to "Delete", [answer, comment], method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-xs"
+        %hr
   %hr
