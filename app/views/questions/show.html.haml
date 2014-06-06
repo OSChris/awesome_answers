@@ -3,8 +3,8 @@
 %p= @question.description
 
 - if @question.user
-  %p Created by #{@question.user.name_display}
-  %p At #{@question.created_at}
+  %p By #{@question.user_name_display}
+  %p Created on #{formatted_date(@question.created_at)}
 
 = link_to "Edit", edit_question_path(@question), class: "btn btn-primary", method: :get  
 
@@ -41,6 +41,7 @@
     - answer.comments.each do |comment|
       .col-xs-11.col-xs-offset-1
         = comment.body
+        = formatted_date(comment.created_at)
         = link_to "edit", edit_answer_comment_path(answer, comment), class: "btn btn-info btn-xs"
         = button_to "Delete", [answer, comment], method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-xs"
         %hr

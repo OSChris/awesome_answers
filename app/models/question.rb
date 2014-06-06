@@ -4,14 +4,15 @@ class Question < ActiveRecord::Base
 
   has_many :answers, dependent: :destroy
   
+  delegate :name_display, to: :user, prefix: true
+
+  # validations
   validates :title, :description,
               presence: {message: "must be provided"},
               uniqueness: true
 
   validates :title, uniqueness: {scope: :description}
-
   validate :stop_words
-
   before_save :sanitize_title
 
   scope :recent, -> { where(["created_at > ?", 3.days.ago]) }
