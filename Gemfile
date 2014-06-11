@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development do
+  gem 'letter_opener'
   gem 'interactive_editor'
   gem 'hirb'
   gem 'awesome_print'

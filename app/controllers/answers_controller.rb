@@ -8,6 +8,7 @@ class AnswersController < ApplicationController
     @answer      = @question.answers.new(answer_params)
     @answer.user = current_user
     if @answer.save
+      AnswersMailer.notify_question_owner(@answer).deliver  
       redirect_to @question, notice: "Answer created successfully"
     else
       render "questions/show"

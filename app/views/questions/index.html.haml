@@ -11,6 +11,7 @@
     - @questions.each_slice(3) do |question_group| 
       .row
         - question_group.each do |question|
-          .col-md-4.well.cre8
+          .col-md-4.well.cre8{id: dom_id(question)}
             %h2= link_to question.title, question
             %p= question.description
+
