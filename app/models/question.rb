@@ -4,6 +4,12 @@ class Question < ActiveRecord::Base
 
   has_many :answers, dependent: :destroy
   
+  has_many :favorites, dependent: :destroy
+  has_many :users, through: :favorites, dependent: :destroy
+  
+  has_many :likes, dependent: :destroy
+  has_many :users, through: :likes, dependent: :destroy
+  
   delegate :name_display, to: :user, prefix: true
 
   # validations

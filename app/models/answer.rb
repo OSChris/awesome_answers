@@ -4,7 +4,7 @@ class Answer < ActiveRecord::Base
   
   has_many :comments, dependent: :destroy
 
-  validates :body, presence: {message: "must exist"}
+  validates :body, presence: true
 
   
 end

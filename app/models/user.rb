@@ -8,6 +8,13 @@ class User < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_many :likes, dependent: :destroy
+  has_many :liked_questions, dependent: :destroy
+
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_questions, through: :favorites, 
+                                    source: :question
+
   def name_display 
     if first_name || last_name
       ["#{first_name}", "#{last_name}"].map(&:capitalize).join(" ").squeeze(" ").strip

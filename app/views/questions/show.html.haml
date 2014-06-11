@@ -5,10 +5,22 @@
 - if @question.user
   %p By #{@question.user_name_display}
   %p Created on #{formatted_date(@question.created_at)}
+- if @question.user == current_user
+  = link_to "Edit", edit_question_path(@question), class: "btn btn-primary", method: :get  
+  = link_to "Delete", @question, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" 
 
-= link_to "Edit", edit_question_path(@question), class: "btn btn-primary", method: :get  
-
-= link_to "Delete", @question, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" 
+- if user_signed_in?
+  - if @question.favorites.exists?(user_id: current_user.id)
+    =link_to "<i class='glyphicon glyphicon-star'></i>".html_safe, [@question, @favorite], class: "btn btn-default", method: :delete
+  - else
+    =link_to "<i class='glyphicon glyphicon-star-empty'></i>".html_safe, [@question, Favorite.new], class: "btn btn-default", method: :post
+- if user_signed_in?
+  -if @question.likes.exists?(user_id: current_user.id)
+    =link_to "<i class='glyphicon glyphicon-thumbs-down'></i>".html_safe, [@question, @like], class: "btn btn-default", method: :delete
+  - else
+    =link_to "<i class='glyphicon glyphicon-thumbs-up'></i>".html_safe, [@question, Like.new], class: "btn btn-default", method: :post
+  .likes.getaway{style: "color: grey"}
+    #{@question.likes.length} user(s) like this question!
 
 %hr
 
@@ -33,7 +45,7 @@
   %hr
   .row
     .col-xs.12
-      = form_for [answer, @comment] do |f|
+      = form_for [answer, Comment.new] do |f|
         = f.text_area :body, rows: 2
         = f.submit "Submit Comment", class: "btn btn-sm btn-info"
     %hr

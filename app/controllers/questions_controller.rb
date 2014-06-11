@@ -23,8 +23,9 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer  = Answer.new
-    @comment = Comment.new
+    @answer = Answer.new
+    @favorite = @question.favorites.where(user: current_user).first
+    @like = @question.likes.where(user: current_user).first
   end
 
   def edit
