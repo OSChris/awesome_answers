@@ -1,0 +1,11 @@
+%p Hello #{@user.name_display},
+
+%p Someone has favorited your question titled: #{@question.title}
+
+%p To view the quesiton click here:
+
+= link_to @question.title, question_url(@question)
+
+%p Regards,
+
+%p Awesome Answers Team

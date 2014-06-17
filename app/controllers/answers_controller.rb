@@ -7,18 +7,24 @@ class AnswersController < ApplicationController
     @question    = Question.find(params[:question_id])
     @answer      = @question.answers.new(answer_params)
     @answer.user = current_user
-    if @answer.save
-      AnswersMailer.notify_question_owner(@answer).deliver  
-      redirect_to @question, notice: "Answer created successfully"
-    else
-      render "questions/show"
-      flash.now[:alert] = "Something went wrong when saving your answer."
+    respond_to do |format|  
+      if @answer.save
+        #AnswersMailer.notify_question_owner(@answer).deliver  
+        format.html {redirect_to @question, notice: "Answer created successfully"}
+        format.js   { render } # create.js.haml
+      else
+        render "questions/show"
+        flash.now[:alert] = "Something went wrong when saving your answer."
+      end
     end
   end
 
   def destroy
-    if @answer.destroy
-      redirect_to @question, notice: "Answer successfully deleted."
+    respond_to do |format|
+      if @answer.destroy
+        format.html { redirect_to @question, notice: "Answer successfully deleted." }
+        format.js { render }
+      end
     end
   end
 

@@ -6,6 +6,7 @@ class FavoritesController < ApplicationController
     @favorite = @question.favorites.new
     @favorite.user = current_user
     if @favorite.save
+      FavoritesMailer.delay.notify_question_owner(@question)
       redirect_to @question, notice: "I love that question too!"
     else
       redirect_to @question, alert: "Couldn't favorite"

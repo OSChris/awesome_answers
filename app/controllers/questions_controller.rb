@@ -24,6 +24,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = Answer.new
+    @answers = @question.answers.order("created_at DESC")
     @favorite = @question.favorites.where(user: current_user).first
     @like = @question.likes.where(user: current_user).first
   end
@@ -50,7 +51,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :description)
+    params.require(:question).permit(:title, :description, {category_ids: []})
   end
 
   def find_question

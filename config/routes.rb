@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :comments, except: [:index, :show, :new]
   end
 
-
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
   root 'questions#index'
 

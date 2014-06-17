@@ -21,6 +21,10 @@ gem 'haml-rails'
 
 gem 'devise', '~> 3.2.4'
 
+# Background Worker
+
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -38,6 +42,7 @@ group :development do
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'faker', '~> 1.3.0'
+  gem 'rails-erd'
 end
 
 # Use ActiveModel has_secure_password

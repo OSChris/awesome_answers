@@ -1,0 +1,2 @@
+$(".answers").prepend("#{j render partial: "/answers/answer" , locals: {question: @question, answer: @answer, comment: @comment } }");
+$("#new-answer").val("");

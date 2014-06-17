@@ -1,0 +1,13 @@
+.well{id: dom_id(answer)}
+  = answer.body 
+  = button_to "Delete", [question, answer], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger", remote: true 
+  %hr
+  .row
+    .col-xs.12.col-md-6
+      = form_for [answer, Comment.new], remote: true do |f|
+        = f.text_area :body, rows: 2, class: "form-control", id: "new-comment"
+        = f.submit "Submit Comment", class: "btn btn-sm btn-info", data: {disable_with: "Submitting..."} 
+    %hr
+    .row.comments
+      - answer.comments.each do |comment|
+        = render partial: "/comments/comment", locals: { answer: answer, comment: comment }

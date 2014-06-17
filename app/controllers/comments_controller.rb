@@ -7,10 +7,13 @@ class CommentsController < ApplicationController
   def create
     @comment      = @answer.comments.new(comment_params)
     @comment.user = current_user
-    if @comment.save
-      redirect_to @answer.question, notice: "Comment posted!"
-    else
-      redirect_to @answer.question, alert: "Comment wasn't posted."
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @answer.question, notice: "Comment posted!" }
+        format.js { render }
+      else
+        redirect_to @answer.question, alert: "Comment wasn't posted."
+      end
     end
   end
 
@@ -28,7 +31,10 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to @answer.question, notice: "Comment deleted"
+    respond_to do |format|
+      format.html { redirect_to @answer.question, notice: "Comment deleted" }
+      format.js { render }
+    end
   end
 
 

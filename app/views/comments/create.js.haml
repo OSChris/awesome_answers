@@ -1,0 +1,2 @@
+$("##{dom_id(@answer)} .comments").prepend("#{ j render partial: "comments/comment", locals: { answer: @answer, comment: @comment } }");
+$("##{dom_id(@answer)} #new-comment").val("");
