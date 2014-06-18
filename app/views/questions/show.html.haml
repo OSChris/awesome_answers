@@ -25,11 +25,7 @@
 %hr
 
 %h2 Submit An Answer
-
-- if @answer.errors.any?
-  %ul
-    - @answer.errors.full_messages.each do |err|
-      %li= err 
+.answer-errors.alert-danger.col-xs-12.col-md-4= render partial: "/shared/standard_errors", locals: { object: @answer }
 
 = form_for [@question, @answer], remote: true do |f|
   = f.text_area :body, class: "form-control", id: "new-answer"

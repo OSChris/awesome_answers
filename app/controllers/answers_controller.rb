@@ -11,10 +11,14 @@ class AnswersController < ApplicationController
       if @answer.save
         #AnswersMailer.notify_question_owner(@answer).deliver  
         format.html {redirect_to @question, notice: "Answer created successfully"}
-        format.js   { render } # create.js.haml
+        format.js   do 
+          flash.now[:notice] = "Answer created successfully"
+          render 
+        end
       else
-        render "questions/show"
         flash.now[:alert] = "Something went wrong when saving your answer."
+        format.html { render "questions/show" }
+        format.js   { render }
       end
     end
   end

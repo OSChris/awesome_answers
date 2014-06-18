@@ -4,7 +4,7 @@
       %li= err
 
 
-= form_for @question do |f| 
+= form_for @question, remote: true do |f| 
   .form-group
     = f.label :title 
     = f.text_field :title, class: "form-control" 

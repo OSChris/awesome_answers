@@ -1,2 +1,8 @@
-$("##{dom_id(@answer)} .comments").prepend("#{ j render partial: "comments/comment", locals: { answer: @answer, comment: @comment } }");
-$("##{dom_id(@answer)} #new-comment").val("");
+- if @comment.errors.any?
+  $(".flash-messages").html("#{j render '/layouts/flash_messages'}");
+  $("##{dom_id(@answer)} .comments-errors").html("#{j render partial: '/shared/standard_errors', locals: { object: @comment } }");
+- else
+  $(".flash-messages").html("#{j render '/layouts/flash_messages'}");
+  $("##{dom_id(@answer)} .comments").prepend("#{ j render partial: "comments/comment", locals: { answer: @answer, comment: @comment } }");
+  $("##{dom_id(@answer)} #new-comment").val("");
+  $("##{dom_id(@answer)} .comments-errors").html("");

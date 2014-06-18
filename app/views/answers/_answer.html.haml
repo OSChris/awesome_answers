@@ -4,6 +4,7 @@
   %hr
   .row
     .col-xs.12.col-md-6
+      .comments-errors.alert-danger.col-xs-12.col-md-12
       = form_for [answer, Comment.new], remote: true do |f|
         = f.text_area :body, rows: 2, class: "form-control", id: "new-comment"
         = f.submit "Submit Comment", class: "btn btn-sm btn-info", data: {disable_with: "Submitting..."} 

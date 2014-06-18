@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    @question = Question.new
   end
 
   def new 
@@ -14,11 +15,17 @@ class QuestionsController < ApplicationController
   def create
     @question      = Question.new(question_params)
     @question.user = current_user
-    if @question.save
-      redirect_to questions_path, notice: "Question Created Successfully"
-    else
-      flash.now[:alert] = "Problem saving question"
-      render :new
+    respond_to do |format|
+      if @question.save
+        format.html { redirect_to questions_path, notice: "Question Created Successfully" }
+        format.js { render }
+      else
+        format.html do 
+          flash.now[:alert] = "Problem saving question"
+          render :new
+        end
+        format.js { render }
+      end
     end
   end
 

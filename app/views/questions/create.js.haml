@@ -1,0 +1,9 @@
+- if @question.errors.any?
+  $(".question-errors").html("#{j render partial: '/shared/standard_errors', locals: { object: @question } }");
+- else
+  $(".questions").append("#{ j render partial: "/questions/question", locals: { question: @question } }");
+  $("#newQuestion").modal("hide");
+
+  $("#new_question input[type='checkbox']").attr("checked", false);
+  $("#question_title").val("");
+  $("#question_description").val("");

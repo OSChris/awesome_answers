@@ -9,10 +9,13 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
+        flash.now[:notice] = "Comment posted!"
         format.html { redirect_to @answer.question, notice: "Comment posted!" }
         format.js { render }
       else
-        redirect_to @answer.question, alert: "Comment wasn't posted."
+        flash.now[:alert] = "Comment couldn't be posted."
+        format.html { redirect_to @answer.question, alert: "Comment wasn't posted." }
+        format.js   { render }
       end
     end
   end

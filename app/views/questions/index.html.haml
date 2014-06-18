@@ -5,13 +5,22 @@
 
 .row.getaway
   .col-xs-12.col-md-4
-    = link_to "<i class='glyphicon-plus'> </i>Create New Question".html_safe, new_question_path, class: "btn btn-primary" 
-.row
-  .col-xs-12.col-md-12
-    - @questions.each_slice(3) do |question_group| 
-      .row
-        - question_group.each do |question|
-          .col-md-4.well.cre8{id: dom_id(question)}
-            %h2= link_to question.title, question
-            %p= question.description
+    = button_tag "<i class='glyphicon-plus'> </i>Create New Question".html_safe, class: "btn btn-primary", data: { toggle: "modal", target: "#newQuestion" }
 
+#newQuestion.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "newQuesitonLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &#215;
+        %h4#myModalLabel.modal-title New Question
+      .modal-body
+        .question-errors
+        = render "/questions/form"
+      .modal-footer
+        
+
+.row
+  .col-xs-12.col-md-12.questions
+    - @questions.each_slice(3) do |question_group| 
+      .row= render question_group
+       

@@ -22,12 +22,7 @@
             %li= link_to "Sign In", new_user_session_path
 
     .container
-      - if flash[:notice]
-        .alert.alert-success
-          = flash[:notice] 
-      - elsif flash[:alert] 
-        .alert.alert-danger
-          = flash[:alert]
+      .flash-messages= render "/layouts/flash_messages"
       
       = yield
 
