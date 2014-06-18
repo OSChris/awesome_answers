@@ -5,7 +5,7 @@
 
 .row.getaway
   .col-xs-12.col-md-4
-    = button_tag "<i class='glyphicon-plus'> </i>Create New Question".html_safe, class: "btn btn-primary", data: { toggle: "modal", target: "#newQuestion" }
+    = button_tag "<i class='glyphicon-plus'> </i>Create New Question".html_safe, class: "btn btn-primary", data: { toggle: "modal", target: "#newQuestion", disable_with: "Creating..." }
 
 #newQuestion.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "newQuesitonLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog

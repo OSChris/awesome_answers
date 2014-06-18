@@ -4,7 +4,8 @@
 - @my_questions.each do |question|
   .row{ id: dom_id(question)}
     .well.col-xs-12.col-md-10.col-md-offset-1
-      %h2= question.title
+      %h2
+        = link_to question.title, question
       %p= question.description
       .row
         .col-md-2.col-md-offset-10.col-xs-6.col-xs-offset-6

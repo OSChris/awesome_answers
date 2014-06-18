@@ -1,7 +1,7 @@
 - if @question.errors.any?
   $("#edit-errors").html("#{j render partial: '/shared/standard_errors', locals: { object: @question } }");
 - else
-  $("##{dom_id(@question)} h2").html($("#edit_question_title").val());
+  $("##{dom_id(@question)} h2").html("<a href='/questions/#{@question.id}'>" + $("#edit_question_title").val() + "</a>");
   $("##{dom_id(@question)} p").html($("#edit_question_description").val());
   $("#editQuestion").modal("hide");
   $("#edit-errors").html("");
