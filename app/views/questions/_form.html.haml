@@ -1,9 +1,3 @@
-- if @question.errors.any? 
-  %ul
-    - @question.errors.full_messages.each do |err| 
-      %li= err
-
-
 = form_for @question, remote: true do |f| 
   .form-group
     = f.label :title 

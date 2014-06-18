@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-
   devise_for :users
+
+  resources :my_questions, only: [:index]
   
   resources :questions do
     resources :favorites, only: [:create, :destroy]

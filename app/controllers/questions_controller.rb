@@ -37,21 +37,30 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-
+    respond_to do |format|
+      format.js { render }
+    end
   end
 
   def update
-    if @question.update_attributes(question_params)
-      redirect_to @question, notice: "Question Updated Successfully"
-    else
-      flash.now[:alert] = "Problem updating question"
-      render :edit
+    respond_to do |format|
+      if @question.update_attributes(question_params)
+        format.html { redirect_to @question, notice: "Question Updated Successfully" }
+        format.js   { render }
+      else
+        flash.now[:alert] = "Problem updating question"
+        format.html { render :edit }
+        format.js   { render }
+      end
     end
   end
 
   def destroy
     @question.destroy
-    redirect_to questions_path, notice: "Question Deleted Successfully"
+    respond_to do |format|
+      format.html { redirect_to questions_path, notice: "Question Deleted Successfully" }
+      format.js   { render }
+    end
   end
 
 

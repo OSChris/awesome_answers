@@ -1,0 +1,22 @@
+%h1 
+  #{current_user.name_display}'s Questions
+
+- @my_questions.each do |question|
+  .row{ id: dom_id(question)}
+    .well.col-xs-12.col-md-10.col-md-offset-1
+      %h2= question.title
+      %p= question.description
+      .row
+        .col-md-2.col-md-offset-10.col-xs-6.col-xs-offset-6
+          = link_to "Delete", question_path(question), method: :delete, class: "btn btn-danger", remote: true, data: { confirm: "Are you sure?" }
+          = link_to "Edit", edit_question_path(question.id), class: "btn btn-info", data: { toggle: "modal", target: "#editQuestion" }, remote: true
+
+#editQuestion.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "editQuesitonLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &#215;
+        %h4#myModalLabel.modal-title Edit Question
+      #edit-errors
+      .modal-body.edit-modal
+      .modal-footer

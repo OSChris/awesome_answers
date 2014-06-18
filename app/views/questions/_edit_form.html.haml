@@ -1,0 +1,18 @@
+- if @question.errors.any? 
+  %ul
+    - @question.errors.full_messages.each do |err| 
+      %li= err
+
+
+= form_for @question, remote: true do |f| 
+  .form-group
+    = f.label :title 
+    = f.text_field :title, class: "form-control", id: "edit_question_title" 
+
+  .form-group
+    = f.label :description 
+    = f.text_area :description, class: "form-control", id: "edit_question_description"
+  .form-group
+    = f.collection_check_boxes :category_ids, Category.order(:name), :id, :name, id: "edit_question_categories"
+
+  = f.submit class: "btn btn-info" 
