@@ -9,6 +9,7 @@ gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'quiet_assets'
+gem 'bootswatch-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -17,9 +18,14 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 # HAML
 gem 'haml-rails'
+
+gem 'simple_form'
 #user auth
 
+
 gem 'devise', '~> 3.2.4'
+
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 # Background Worker
 

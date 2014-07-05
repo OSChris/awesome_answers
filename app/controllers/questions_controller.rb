@@ -38,7 +38,8 @@ class QuestionsController < ApplicationController
 
   def edit
     respond_to do |format|
-      format.js { render }
+      format.html { render :edit}
+      format.js   { render }
     end
   end
 
